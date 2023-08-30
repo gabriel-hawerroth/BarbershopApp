@@ -1,3 +1,4 @@
+import 'package:dw_barbershop/src/core/ui/constants.dart';
 import 'package:dw_barbershop/src/features/auth/login/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,7 @@ class _SplashPageState extends State<SplashPage> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              'assets/images/background_image_chair.jpg',
+              ImageConstants.backgroundChair,
             ),
             opacity: 0.3,
             fit: BoxFit.cover,
@@ -42,7 +43,7 @@ class _SplashPageState extends State<SplashPage> {
         ),
         child: Center(
           child: AnimatedOpacity(
-            duration: const Duration(seconds: 1),
+            duration: const Duration(seconds: 2),
             curve: Curves.easeIn,
             opacity: _animationOpacityLogo,
             onEnd: () {
@@ -67,12 +68,12 @@ class _SplashPageState extends State<SplashPage> {
               );
             },
             child: AnimatedContainer(
-              duration: const Duration(seconds: 1),
+              duration: const Duration(seconds: 2),
               width: _logoAnimationWidth,
               height: _logoAnimationHeight,
               curve: Curves.linearToEaseOut,
               child: Image.asset(
-                'assets/images/imgLogo.png',
+                ImageConstants.imageLogo,
                 fit: BoxFit.cover,
               ),
             ),
