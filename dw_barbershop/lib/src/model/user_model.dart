@@ -13,18 +13,18 @@ sealed class UserModel {
 
   factory UserModel.fromMap(Map<String, dynamic> json) {
     return switch (json['profile']) {
-      'ADM' => UserModelAdm.fromMap(json),
+      'ADM' => UserModelADM.fromMap(json),
       'EMPLOYEE' => UserModelEmployee.fromMap(json),
       _ => throw ArgumentError('User profile not found')
     };
   }
 }
 
-class UserModelAdm extends UserModel {
+class UserModelADM extends UserModel {
   final List<String>? workDays;
   final List<int>? workHours;
 
-  UserModelAdm({
+  UserModelADM({
     required super.id,
     required super.name,
     required super.email,
@@ -33,22 +33,22 @@ class UserModelAdm extends UserModel {
     this.workHours,
   });
 
-  factory UserModelAdm.fromMap(Map<String, dynamic> json) {
+  factory UserModelADM.fromMap(Map<String, dynamic> json) {
     return switch (json) {
       {
         'id': final int id,
         'name': final String name,
         'email': final String email,
       } =>
-        UserModelAdm(
+        UserModelADM(
           id: id,
           name: name,
           email: email,
           avatar: json['avatar'],
-          workDays: json['work_days']?.cast<String>(),
+          workDays: json['word_days']?.cast<String>(),
           workHours: json['work_hours']?.cast<int>(),
         ),
-      _ => throw ArgumentError('Invalid json'),
+      _ => throw ArgumentError('Invalid Json'),
     };
   }
 }
@@ -62,10 +62,10 @@ class UserModelEmployee extends UserModel {
     required super.id,
     required super.name,
     required super.email,
-    super.avatar,
     required this.barbershopId,
     required this.workDays,
     required this.workHours,
+    super.avatar,
   });
 
   factory UserModelEmployee.fromMap(Map<String, dynamic> json) {
@@ -87,7 +87,7 @@ class UserModelEmployee extends UserModel {
           workDays: workDays.cast<String>(),
           workHours: workHours.cast<int>(),
         ),
-      _ => throw ArgumentError('Invalid json'),
+      _ => throw ArgumentError('Invalid Json'),
     };
   }
 }

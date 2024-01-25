@@ -1,6 +1,9 @@
 sealed class AuthException implements Exception {
   final String message;
-  AuthException({required this.message});
+
+  AuthException({
+    required this.message,
+  });
 }
 
 class AuthError extends AuthException {

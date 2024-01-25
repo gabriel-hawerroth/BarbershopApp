@@ -32,18 +32,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     ref.listen(loginVmProvider, (_, state) {
       switch (state) {
-        case LoginState(status: LoginStateStatus.initial):
+        case LoginState(status: LoginStateStatus.inital):
           break;
         case LoginState(status: LoginStateStatus.error, :final errorMessage?):
           Messages.showError(errorMessage, context);
+          break;
         case LoginState(status: LoginStateStatus.error):
-          Messages.showError('Erro ao realizar login', context);
+          Messages.showError('Erro ao realizar o login', context);
+          break;
         case LoginState(status: LoginStateStatus.admLogin):
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/home/adm', (route) => false);
+          break;
         case LoginState(status: LoginStateStatus.employeeLogin):
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/home/employee', (route) => false);
+          break;
       }
     });
 
@@ -54,10 +58,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         child: DecoratedBox(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(
-                ImageConstants.backgroundChair,
-              ),
-              opacity: 0.3,
+              image: AssetImage(ImageConstants.backgroundChair),
+              opacity: 0.2,
               fit: BoxFit.cover,
             ),
           ),
@@ -75,18 +77,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         children: [
                           Image.asset(ImageConstants.imageLogo),
                           const SizedBox(
-                            height: 25,
+                            height: 24,
                           ),
                           TextFormField(
                             onTapOutside: (_) => context.unfocus(),
                             validator: Validatorless.multiple([
-                              Validatorless.required('E-mail obrigatório'),
-                              Validatorless.email('E-mail inválido'),
+                              Validatorless.required('Email obrigatório'),
+                              Validatorless.email('Email inválido')
                             ]),
                             controller: emailEC,
                             decoration: const InputDecoration(
-                              label: Text('E-mail'),
-                              hintText: 'E-mail',
+                              label: Text('Email'),
+                              hintText: 'Email',
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.never,
                               labelStyle: TextStyle(color: Colors.black),
@@ -94,14 +96,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 24,
                           ),
                           TextFormField(
                             onTapOutside: (_) => context.unfocus(),
                             validator: Validatorless.multiple([
                               Validatorless.required('Senha obrigatória'),
                               Validatorless.min(6,
-                                  'A senha deve conter pelo menos 6 caracteres'),
+                                  'A senha deve conter pelo menos 6 caracteres')
                             ]),
                             obscureText: true,
                             controller: passwordEC,
@@ -115,15 +117,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 14,
+                            height: 16,
                           ),
                           const Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              'Esqueceu a senha?',
+                              'Esqueceu a senha',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: ColorsConstants.brow,
+                                color: ColorsConstants.brown,
                               ),
                             ),
                           ),
@@ -138,23 +140,33 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               switch (formKey.currentState?.validate()) {
                                 case (false || null):
                                   Messages.showError(
-                                      'Campos inválidos', context);
+                                    'Campos inválidos',
+                                    context,
+                                  );
+                                  break;
                                 case true:
                                   login(emailEC.text, passwordEC.text);
+                                  break;
                               }
                             },
                             child: const Text('ACESSAR'),
                           )
                         ],
                       ),
-                      const Align(
+                      Align(
                         alignment: Alignment.bottomCenter,
-                        child: Text(
-                          'Criar conta',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed('/auth/register/user');
+                          },
+                          child: const Text(
+                            'Criar conta',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       )

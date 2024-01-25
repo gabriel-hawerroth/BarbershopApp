@@ -16,9 +16,9 @@ class BarbershopModel {
   factory BarbershopModel.fromMap(Map<String, dynamic> json) {
     return switch (json) {
       {
-        'id': int id,
-        'name': String name,
-        'email': String email,
+        'id': final int id,
+        'name': final String name,
+        'email': final String email,
         'opening_days': final List openingDays,
         'opening_hours': final List openingHours,
       } =>
@@ -29,7 +29,7 @@ class BarbershopModel {
           openingDays: openingDays.cast<String>(),
           openingHours: openingHours.cast<int>(),
         ),
-      _ => throw ArgumentError('Invalid json'),
+      _ => throw ArgumentError('Invalid Json')
     };
   }
 }

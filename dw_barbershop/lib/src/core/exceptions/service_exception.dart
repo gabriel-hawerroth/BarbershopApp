@@ -1,4 +1,7 @@
-final class ServiceException implements Exception {
+class ServiceException implements Exception {
   final String message;
-  ServiceException({required this.message});
+
+  ServiceException({
+    required this.message,
+  });
 }

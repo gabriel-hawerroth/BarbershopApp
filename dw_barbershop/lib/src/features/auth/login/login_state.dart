@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 
-enum LoginStateStatus {
-  initial,
-  error,
-  admLogin,
-  employeeLogin,
-}
+enum LoginStateStatus { inital, error, admLogin, employeeLogin }
 
 class LoginState {
   final LoginStateStatus status;
   final String? errorMessage;
 
-  LoginState.initial() : this(status: LoginStateStatus.initial);
+  LoginState.initial() : this(status: LoginStateStatus.inital);
 
   LoginState({
     required this.status,
@@ -23,8 +18,8 @@ class LoginState {
     ValueGetter<String?>? errorMessage,
   }) {
     return LoginState(
-        status: status ?? this.status,
-        errorMessage:
-            errorMessage != null ? errorMessage() : this.errorMessage);
+      status: status ?? this.status,
+      errorMessage: errorMessage != null ? errorMessage() : this.errorMessage,
+    );
   }
 }

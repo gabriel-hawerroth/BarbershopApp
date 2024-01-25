@@ -35,16 +35,17 @@ Future<UserModel> getMe(GetMeRef ref) async {
 
 @Riverpod(keepAlive: true)
 BarbershopRepository barbershopRepository(BarbershopRepositoryRef ref) =>
-    BarbershopRepositoryImpl(restClient: ref.watch(restClientProvider));
+    BarbershopRepositoryImpl(restClient: ref.read(restClientProvider));
 
 @Riverpod(keepAlive: true)
 Future<BarbershopModel> getMyBarbershop(GetMyBarbershopRef ref) async {
   final userModel = await ref.watch(getMeProvider.future);
+
   final barbershopRepository = ref.watch(barbershopRepositoryProvider);
   final result = await barbershopRepository.getMyBarbershop(userModel);
 
   return switch (result) {
     Success(value: final barbershop) => barbershop,
-    Failure(:final exception) => throw exception
+    Failure(:final exception) => throw exception,
   };
 }

@@ -65,7 +65,7 @@ final getMeProvider = FutureProvider<UserModel>.internal(
 
 typedef GetMeRef = FutureProviderRef<UserModel>;
 String _$barbershopRepositoryHash() =>
-    r'a64ad01ae6b70f8192c02a09abc33ea968315cb9';
+    r'881b99d6f5c4eaefa30b529ce5191ec99fdcb88a';
 
 /// See also [barbershopRepository].
 @ProviderFor(barbershopRepository)

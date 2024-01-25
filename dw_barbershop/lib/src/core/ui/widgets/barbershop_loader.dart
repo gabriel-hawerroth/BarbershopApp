@@ -9,7 +9,7 @@ class BarbershopLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: LoadingAnimationWidget.threeArchedCircle(
-        color: ColorsConstants.brow,
+        color: ColorsConstants.brown,
         size: 60,
       ),
     );
